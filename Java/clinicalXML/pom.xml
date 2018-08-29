@@ -1,0 +1,152 @@
+<project>
+  <groupId>spark_1.2.0_projects</groupId>
+  <artifactId>clinical_element_120</artifactId>
+  <modelVersion>4.0.0</modelVersion>
+  <name>Pr1</name>
+  <packaging>jar</packaging>
+  <version>1.0</version>
+  <repositories>
+    <repository>
+      <id>Akka repository</id>
+      <url>http://repo.akka.io/releases</url>
+    </repository>
+
+
+  </repositories>
+  <dependencies>
+    <dependency> <!-- Spark dependency -->
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.10</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+
+    <dependency> <!-- Hadoop dependency -->
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>2.4.0</version>
+    </dependency>
+<!--
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1</version>
+    </dependency>
+    
+   <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.3.3</version>
+    </dependency>
+
+
+    <dependency>
+     <groupId>javax.servlet</groupId>
+     <artifactId>servlet-api</artifactId>
+     <version>3.0-alpha-1</version>
+     <scope>compile</scope>
+    </dependency>
+
+-->
+
+    <dependency>
+	<groupId>org.apache.spark</groupId>
+	<artifactId>spark-yarn_2.10</artifactId>
+	<version>1.2.0</version>
+    </dependency>
+
+
+
+
+
+<!-- kafka dependency -->
+ <dependency>
+		<groupId>org.apache.kafka</groupId>
+		<artifactId>kafka_2.10</artifactId>
+		<version>0.8.1</version>
+		<exclusions>
+            <exclusion>
+                <groupId>com.sun.jmx</groupId>
+                <artifactId>jmxri</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>com.sun.jdmk</groupId>
+                <artifactId>jmxtools</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>javax.jms</groupId>
+                <artifactId>jms</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>com.yammer.metrics</groupId>
+        <artifactId>metrics-annotation</artifactId>
+        <version>2.2.0</version>
+    </dependency>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </dependencies>
+
+<build>
+ <plugins>
+      <!--
+        Bind the maven-assembly-plugin to the package phase
+        this will create a jar file without the storm dependencies
+        suitable for deployment to a cluster.
+       -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <mainClass></mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.2.1</version>
+   	<!--    <configuration>
+              	  <mainClass>test.HelloWorld</mainClass>
+           	</configuration>-->
+      </plugin>
+
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+	  <artifactId>maven-compiler-plugin</artifactId>
+	  <configuration>
+	      <source>1.7</source>
+		<target>1.7</target>
+	  </configuration>
+      </plugin>
+</plugins>
+</build>
+ 
+</project>
